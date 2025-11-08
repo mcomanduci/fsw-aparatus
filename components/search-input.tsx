@@ -10,7 +10,7 @@ export default function SearchInput() {
         placeholder="Pesquise serviços ou barbearias"
         className="border-border rounded-full"
       />
-      <Button variant="ghost" size="icon">
+      <Button variant="default" size="icon" className="rounded-full">
         <SearchIcon />
       </Button>
     </div>
