@@ -224,6 +224,7 @@ export type BarbershopServiceWhereInput = {
   barbershopId?: Prisma.StringFilter<"BarbershopService"> | string
   priceInCents?: Prisma.IntFilter<"BarbershopService"> | number
   barbershop?: Prisma.XOR<Prisma.BarbershopScalarRelationFilter, Prisma.BarbershopWhereInput>
+  bookings?: Prisma.BookingListRelationFilter
 }
 
 export type BarbershopServiceOrderByWithRelationInput = {
@@ -234,6 +235,7 @@ export type BarbershopServiceOrderByWithRelationInput = {
   barbershopId?: Prisma.SortOrder
   priceInCents?: Prisma.SortOrder
   barbershop?: Prisma.BarbershopOrderByWithRelationInput
+  bookings?: Prisma.BookingOrderByRelationAggregateInput
 }
 
 export type BarbershopServiceWhereUniqueInput = Prisma.AtLeast<{
@@ -247,6 +249,7 @@ export type BarbershopServiceWhereUniqueInput = Prisma.AtLeast<{
   barbershopId?: Prisma.StringFilter<"BarbershopService"> | string
   priceInCents?: Prisma.IntFilter<"BarbershopService"> | number
   barbershop?: Prisma.XOR<Prisma.BarbershopScalarRelationFilter, Prisma.BarbershopWhereInput>
+  bookings?: Prisma.BookingListRelationFilter
 }, "id">
 
 export type BarbershopServiceOrderByWithAggregationInput = {
@@ -282,6 +285,7 @@ export type BarbershopServiceCreateInput = {
   imageUrl: string
   priceInCents: number
   barbershop: Prisma.BarbershopCreateNestedOneWithoutServicesInput
+  bookings?: Prisma.BookingCreateNestedManyWithoutServiceInput
 }
 
 export type BarbershopServiceUncheckedCreateInput = {
@@ -291,6 +295,7 @@ export type BarbershopServiceUncheckedCreateInput = {
   imageUrl: string
   barbershopId: string
   priceInCents: number
+  bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutServiceInput
 }
 
 export type BarbershopServiceUpdateInput = {
@@ -300,6 +305,7 @@ export type BarbershopServiceUpdateInput = {
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   priceInCents?: Prisma.IntFieldUpdateOperationsInput | number
   barbershop?: Prisma.BarbershopUpdateOneRequiredWithoutServicesNestedInput
+  bookings?: Prisma.BookingUpdateManyWithoutServiceNestedInput
 }
 
 export type BarbershopServiceUncheckedUpdateInput = {
@@ -309,6 +315,7 @@ export type BarbershopServiceUncheckedUpdateInput = {
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   barbershopId?: Prisma.StringFieldUpdateOperationsInput | string
   priceInCents?: Prisma.IntFieldUpdateOperationsInput | number
+  bookings?: Prisma.BookingUncheckedUpdateManyWithoutServiceNestedInput
 }
 
 export type BarbershopServiceCreateManyInput = {
@@ -382,6 +389,11 @@ export type BarbershopServiceSumOrderByAggregateInput = {
   priceInCents?: Prisma.SortOrder
 }
 
+export type BarbershopServiceScalarRelationFilter = {
+  is?: Prisma.BarbershopServiceWhereInput
+  isNot?: Prisma.BarbershopServiceWhereInput
+}
+
 export type BarbershopServiceCreateNestedManyWithoutBarbershopInput = {
   create?: Prisma.XOR<Prisma.BarbershopServiceCreateWithoutBarbershopInput, Prisma.BarbershopServiceUncheckedCreateWithoutBarbershopInput> | Prisma.BarbershopServiceCreateWithoutBarbershopInput[] | Prisma.BarbershopServiceUncheckedCreateWithoutBarbershopInput[]
   connectOrCreate?: Prisma.BarbershopServiceCreateOrConnectWithoutBarbershopInput | Prisma.BarbershopServiceCreateOrConnectWithoutBarbershopInput[]
@@ -432,12 +444,27 @@ export type IntFieldUpdateOperationsInput = {
   divide?: number
 }
 
+export type BarbershopServiceCreateNestedOneWithoutBookingsInput = {
+  create?: Prisma.XOR<Prisma.BarbershopServiceCreateWithoutBookingsInput, Prisma.BarbershopServiceUncheckedCreateWithoutBookingsInput>
+  connectOrCreate?: Prisma.BarbershopServiceCreateOrConnectWithoutBookingsInput
+  connect?: Prisma.BarbershopServiceWhereUniqueInput
+}
+
+export type BarbershopServiceUpdateOneRequiredWithoutBookingsNestedInput = {
+  create?: Prisma.XOR<Prisma.BarbershopServiceCreateWithoutBookingsInput, Prisma.BarbershopServiceUncheckedCreateWithoutBookingsInput>
+  connectOrCreate?: Prisma.BarbershopServiceCreateOrConnectWithoutBookingsInput
+  upsert?: Prisma.BarbershopServiceUpsertWithoutBookingsInput
+  connect?: Prisma.BarbershopServiceWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BarbershopServiceUpdateToOneWithWhereWithoutBookingsInput, Prisma.BarbershopServiceUpdateWithoutBookingsInput>, Prisma.BarbershopServiceUncheckedUpdateWithoutBookingsInput>
+}
+
 export type BarbershopServiceCreateWithoutBarbershopInput = {
   id?: string
   name: string
   description: string
   imageUrl: string
   priceInCents: number
+  bookings?: Prisma.BookingCreateNestedManyWithoutServiceInput
 }
 
 export type BarbershopServiceUncheckedCreateWithoutBarbershopInput = {
@@ -446,6 +473,7 @@ export type BarbershopServiceUncheckedCreateWithoutBarbershopInput = {
   description: string
   imageUrl: string
   priceInCents: number
+  bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutServiceInput
 }
 
 export type BarbershopServiceCreateOrConnectWithoutBarbershopInput = {
@@ -486,6 +514,58 @@ export type BarbershopServiceScalarWhereInput = {
   priceInCents?: Prisma.IntFilter<"BarbershopService"> | number
 }
 
+export type BarbershopServiceCreateWithoutBookingsInput = {
+  id?: string
+  name: string
+  description: string
+  imageUrl: string
+  priceInCents: number
+  barbershop: Prisma.BarbershopCreateNestedOneWithoutServicesInput
+}
+
+export type BarbershopServiceUncheckedCreateWithoutBookingsInput = {
+  id?: string
+  name: string
+  description: string
+  imageUrl: string
+  barbershopId: string
+  priceInCents: number
+}
+
+export type BarbershopServiceCreateOrConnectWithoutBookingsInput = {
+  where: Prisma.BarbershopServiceWhereUniqueInput
+  create: Prisma.XOR<Prisma.BarbershopServiceCreateWithoutBookingsInput, Prisma.BarbershopServiceUncheckedCreateWithoutBookingsInput>
+}
+
+export type BarbershopServiceUpsertWithoutBookingsInput = {
+  update: Prisma.XOR<Prisma.BarbershopServiceUpdateWithoutBookingsInput, Prisma.BarbershopServiceUncheckedUpdateWithoutBookingsInput>
+  create: Prisma.XOR<Prisma.BarbershopServiceCreateWithoutBookingsInput, Prisma.BarbershopServiceUncheckedCreateWithoutBookingsInput>
+  where?: Prisma.BarbershopServiceWhereInput
+}
+
+export type BarbershopServiceUpdateToOneWithWhereWithoutBookingsInput = {
+  where?: Prisma.BarbershopServiceWhereInput
+  data: Prisma.XOR<Prisma.BarbershopServiceUpdateWithoutBookingsInput, Prisma.BarbershopServiceUncheckedUpdateWithoutBookingsInput>
+}
+
+export type BarbershopServiceUpdateWithoutBookingsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  priceInCents?: Prisma.IntFieldUpdateOperationsInput | number
+  barbershop?: Prisma.BarbershopUpdateOneRequiredWithoutServicesNestedInput
+}
+
+export type BarbershopServiceUncheckedUpdateWithoutBookingsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  barbershopId?: Prisma.StringFieldUpdateOperationsInput | string
+  priceInCents?: Prisma.IntFieldUpdateOperationsInput | number
+}
+
 export type BarbershopServiceCreateManyBarbershopInput = {
   id?: string
   name: string
@@ -500,6 +580,7 @@ export type BarbershopServiceUpdateWithoutBarbershopInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   priceInCents?: Prisma.IntFieldUpdateOperationsInput | number
+  bookings?: Prisma.BookingUpdateManyWithoutServiceNestedInput
 }
 
 export type BarbershopServiceUncheckedUpdateWithoutBarbershopInput = {
@@ -508,6 +589,7 @@ export type BarbershopServiceUncheckedUpdateWithoutBarbershopInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   priceInCents?: Prisma.IntFieldUpdateOperationsInput | number
+  bookings?: Prisma.BookingUncheckedUpdateManyWithoutServiceNestedInput
 }
 
 export type BarbershopServiceUncheckedUpdateManyWithoutBarbershopInput = {
@@ -519,6 +601,35 @@ export type BarbershopServiceUncheckedUpdateManyWithoutBarbershopInput = {
 }
 
 
+/**
+ * Count Type BarbershopServiceCountOutputType
+ */
+
+export type BarbershopServiceCountOutputType = {
+  bookings: number
+}
+
+export type BarbershopServiceCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  bookings?: boolean | BarbershopServiceCountOutputTypeCountBookingsArgs
+}
+
+/**
+ * BarbershopServiceCountOutputType without action
+ */
+export type BarbershopServiceCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BarbershopServiceCountOutputType
+   */
+  select?: Prisma.BarbershopServiceCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * BarbershopServiceCountOutputType without action
+ */
+export type BarbershopServiceCountOutputTypeCountBookingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BookingWhereInput
+}
+
 
 export type BarbershopServiceSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -528,6 +639,8 @@ export type BarbershopServiceSelect<ExtArgs extends runtime.Types.Extensions.Int
   barbershopId?: boolean
   priceInCents?: boolean
   barbershop?: boolean | Prisma.BarbershopDefaultArgs<ExtArgs>
+  bookings?: boolean | Prisma.BarbershopService$bookingsArgs<ExtArgs>
+  _count?: boolean | Prisma.BarbershopServiceCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["barbershopService"]>
 
 export type BarbershopServiceSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -562,6 +675,8 @@ export type BarbershopServiceSelectScalar = {
 export type BarbershopServiceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "imageUrl" | "barbershopId" | "priceInCents", ExtArgs["result"]["barbershopService"]>
 export type BarbershopServiceInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   barbershop?: boolean | Prisma.BarbershopDefaultArgs<ExtArgs>
+  bookings?: boolean | Prisma.BarbershopService$bookingsArgs<ExtArgs>
+  _count?: boolean | Prisma.BarbershopServiceCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type BarbershopServiceIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   barbershop?: boolean | Prisma.BarbershopDefaultArgs<ExtArgs>
@@ -574,6 +689,7 @@ export type $BarbershopServicePayload<ExtArgs extends runtime.Types.Extensions.I
   name: "BarbershopService"
   objects: {
     barbershop: Prisma.$BarbershopPayload<ExtArgs>
+    bookings: Prisma.$BookingPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -977,6 +1093,7 @@ readonly fields: BarbershopServiceFieldRefs;
 export interface Prisma__BarbershopServiceClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   barbershop<T extends Prisma.BarbershopDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BarbershopDefaultArgs<ExtArgs>>): Prisma.Prisma__BarbershopClient<runtime.Types.Result.GetResult<Prisma.$BarbershopPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  bookings<T extends Prisma.BarbershopService$bookingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BarbershopService$bookingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BookingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1405,6 +1522,30 @@ export type BarbershopServiceDeleteManyArgs<ExtArgs extends runtime.Types.Extens
    * Limit how many BarbershopServices to delete.
    */
   limit?: number
+}
+
+/**
+ * BarbershopService.bookings
+ */
+export type BarbershopService$bookingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Booking
+   */
+  select?: Prisma.BookingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Booking
+   */
+  omit?: Prisma.BookingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BookingInclude<ExtArgs> | null
+  where?: Prisma.BookingWhereInput
+  orderBy?: Prisma.BookingOrderByWithRelationInput | Prisma.BookingOrderByWithRelationInput[]
+  cursor?: Prisma.BookingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BookingScalarFieldEnum | Prisma.BookingScalarFieldEnum[]
 }
 
 /**

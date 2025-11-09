@@ -10,4 +10,8 @@
 export type * from './models/Barbershop'
 export type * from './models/BarbershopService'
 export type * from './models/Booking'
+export type * from './models/User'
+export type * from './models/Session'
+export type * from './models/Account'
+export type * from './models/Verification'
 export type * from './commonInputTypes'

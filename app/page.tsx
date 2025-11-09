@@ -12,57 +12,56 @@ import {
   PageSectionScroller,
   PageSectionTitle,
 } from "@/components/ui/page";
+import Link from "next/link";
+import QuickSearchButtons from "@/components/quick-search-buttons";
 
-export default async function Home() {
+const Home = async () => {
   const recommendedBarbershops = await prisma.barbershop.findMany({
-    orderBy: { name: "asc" },
+    orderBy: {
+      name: "asc",
+    },
   });
   const popularBarbershops = await prisma.barbershop.findMany({
-    orderBy: { name: "desc" },
+    orderBy: {
+      name: "desc",
+    },
   });
-
   return (
-    <>
+    <main>
       <Header />
-      <main className="">
-        <PageContainer>
-          <SearchInput />
-          <Image
-            src={banner}
-            alt="Agende agora!"
-            sizes="100vw"
-            className="h-auto w-full"
-          />
-          <PageSection>
-            <PageSectionTitle>Agendamentos</PageSectionTitle>
-            <BookingItem
-              serviceName="Corte de cabelo"
-              barbershopName="Barbearia do Zé"
-              barbershopImageUrl="https://utfs.io/f/e995db6d-df96-4658-99f5-11132fd931e1-17j.png"
-              date={new Date("2024-07-15T14:30:00")}
-            />
-          </PageSection>
+      <PageContainer>
+        <SearchInput />
 
-          <PageSection>
-            <PageSectionTitle>Barbearias</PageSectionTitle>
-            <PageSectionScroller>
-              {recommendedBarbershops.map((barbershop) => (
-                <BarbershopItem key={barbershop.id} barbershop={barbershop} />
-              ))}
-            </PageSectionScroller>
-          </PageSection>
+        <QuickSearchButtons />
 
-          <PageSection>
-            <PageSectionTitle>Barbearias Populares</PageSectionTitle>
-            <PageSectionScroller>
-              {popularBarbershops.map((barbershop) => (
-                <BarbershopItem key={barbershop.id} barbershop={barbershop} />
-              ))}
-            </PageSectionScroller>
-          </PageSection>
-        </PageContainer>
-      </main>
+        <Image
+          src={banner}
+          alt="Agende agora!"
+          sizes="100vw"
+          className="h-auto w-full"
+        />
+
+        <PageSection>
+          <PageSectionTitle>Recomendados</PageSectionTitle>
+          <PageSectionScroller>
+            {recommendedBarbershops.map((barbershop) => (
+              <BarbershopItem key={barbershop.id} barbershop={barbershop} />
+            ))}
+          </PageSectionScroller>
+        </PageSection>
+
+        <PageSection>
+          <PageSectionTitle>Populares</PageSectionTitle>
+          <PageSectionScroller>
+            {popularBarbershops.map((barbershop) => (
+              <BarbershopItem key={barbershop.id} barbershop={barbershop} />
+            ))}
+          </PageSectionScroller>
+        </PageSection>
+      </PageContainer>
       <Footer />
-    </>
+    </main>
   );
-}
+};
+
+export default Home;
